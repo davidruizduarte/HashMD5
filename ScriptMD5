@@ -1,0 +1,43 @@
+#David Ruiz
+#@viajatech
+
+import tkinter as tk
+from tkinter import ttk
+import hashlib
+
+def generate_md5():
+    name = name_entry.get()
+    if name:
+        md5_hash = hashlib.md5(name.encode()).hexdigest()
+        result_label.config(text=f'MD5: {md5_hash}')
+    else:
+        result_label.config(text='Por favor, ingrese un nombre.')
+
+# Crear la ventana principal
+root = tk.Tk()
+root.title('Generador de Hash MD5')
+
+# Crear y configurar el frame principal
+frame = ttk.Frame(root, padding='10 10 10 10')
+frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+# Crear widgets
+name_label = ttk.Label(frame, text='Ingrese el nombre:')
+name_entry = ttk.Entry(frame, width=30)
+generate_button = ttk.Button(frame, text='Generar MD5', command=generate_md5)
+result_label = ttk.Label(frame, text='')
+
+# Ubicar widgets en la grid
+name_label.grid(row=0, column=0, sticky=tk.W, pady=5)
+name_entry.grid(row=0, column=1, pady=5)
+generate_button.grid(row=1, column=0, columnspan=2, pady=5)
+result_label.grid(row=2, column=0, columnspan=2, pady=5)
+
+# Configurar redimensionamiento de la ventana
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
+frame.columnconfigure(0, weight=1)
+frame.columnconfigure(1, weight=1)
+
+# Iniciar el loop principal de la GUI
+root.mainloop()
